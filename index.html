@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="ONION.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onion Leaf Disease Detector</title>
+    <link rel="stylesheet" href="ONION.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-leaf"></i> Onion Leaf Disease Detector</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#detect">Detect Disease</a></li>
+                    <li><a href="#history">History</a></li>
+                    <li><a href="#recommendations">Recommendations</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="home" class="hero-section">
+            <h2>Welcome to the Onion Leaf Disease Detection System</h2>
+            <p>Utilizing Convolutional Neural Networks (CNN) to accurately identify fungal diseases in onion leaves and provide actionable recommendations for farmers.</p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-camera"></i>
+                    <h3>Capture Image</h3>
+                    <p>Use your device camera to capture an onion leaf image.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-upload"></i>
+                    <h3>Upload Image</h3>
+                    <p>Upload an image from your gallery for analysis.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-history"></i>
+                    <h3>View History</h3>
+                    <p>Access your past classification results and details.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Get Recommendations</h3>
+                    <p>Receive general farming tips and preventive measures.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="detect" class="detection-section">
+            <h2>Detect Onion Leaf Disease</h2>
+            <div class="upload-area">
+                <p>Select or capture an image of an onion leaf for analysis:</p>
+                <input type="file" id="imageInput" accept="image/*">
+                <button id="captureFromCameraBtn" class="btn primary-btn"><i class="fas fa-camera"></i> Capture with Camera</button>
+                <button id="uploadBtn" class="btn primary-btn"><i class="fas fa-upload"></i> Upload Image</button>
+
+                <div class="image-preview-container">
+                    <video id="videoPreview" autoplay playsinline style="display: none;"></video>
+                    <img id="imagePreview" src="#" alt="Image Preview" style="display: none;">
+                    <p id="previewPlaceholder">No image selected</p>
+                </div>
+
+                <button id="analyzeImageBtn" class="btn success-btn" disabled>
+                    <i class="fas fa-search"></i> Analyze Image
+                </button>
+            </div>
+
+            <div id="resultsSection" class="results-area" style="display: none;">
+                <h3>Analysis Results</h3>
+                <div class="result-item"><strong>Disease Type:</strong> <span id="diseaseType"></span></div>
+                <div class="result-item"><strong>Confidence Score:</strong> <span id="confidenceScore"></span></div>
+                <div class="result-description"><h4>Description:</h4><p id="diseaseDescription"></p></div>
+                <div class="prescription-mitigation">
+                    <h4>Prescription:</h4><ul id="prescriptionList"></ul>
+                    <h4>Mitigation Strategies:</h4><ul id="mitigationList"></ul>
+                </div>
+                <button class="btn share-btn"><i class="fas fa-share-alt"></i> Share Results</button>
+            </div>
+        </section>
+
+        <section id="history" class="history-section">
+            <h2>Previous Classifications</h2>
+            <div class="history-list"></div>
+            <p id="noHistoryMessage" style="display: none;">No previous classifications found.</p>
+        </section>
+
+        <section id="recommendations" class="recommendations-section">
+            <h2>General Farming Recommendations</h2>
+            <div class="recommendation-category">
+                <h3><i class="fas fa-seedling"></i> Cultural Practices</h3>
+                <ul>
+                    <li><strong>Crop Rotation:</strong> Avoid planting onions in the same field for 3-4 years to reduce fungal spores.</li>
+                    <li><strong>Sanitation:</strong> Remove and destroy infected plant debris promptly.</li>
+                    <li><strong>Proper Spacing:</strong> Ensure adequate spacing for air circulation to reduce humidity.</li>
+                    <li><strong>Irrigation Management:</strong> Use drip irrigation instead of overhead watering to minimize leaf wetness.</li>
+                </ul>
+            </div>
+            <div class="recommendation-category">
+                <h3><i class="fas fa-flask"></i> Chemical Control (Fungicides)</h3>
+                <ul>
+                    <li><strong>Downy Mildew:</strong> Use fungicides like chlorothalonil, mancozeb, or metalaxyl.</li>
+                    <li><strong>Purple Blotch:</strong> Apply azoxystrobin, propiconazole, or tebuconazole.</li>
+                    <li><strong>Stemphylium Leaf Blight:</strong> Use boscalid or pyraclostrobin.</li>
+                    <li>Follow recommended dosage and application frequency to avoid resistance.</li>
+                    <li>Apply fungicides preventively during periods of high humidity or rainfall.</li>
+                </ul>
+            </div>
+            <div class="recommendation-category">
+                <h3><i class="fas fa-microbe"></i> Biological Control</h3>
+                <ul>
+                    <li><strong>Biofungicides:</strong> Use *Trichoderma harzianum* or *Bacillus subtilis* to suppress fungal growth.</li>
+                    <li><strong>Beneficial Microbes:</strong> Introduce beneficial microbes to the soil to enhance plant immunity.</li>
+                </ul>
+            </div>
+            <div class="recommendation-category">
+                <h3><i class="fas fa-tractor"></i> Soil Management & Resistant Varieties</h3>
+                <ul>
+                    <li><strong>Plant Resistant Cultivars:</strong> Use onion varieties resistant or tolerant to specific fungal diseases.</li>
+                    <li><strong>Soil Testing:</strong> Test soil for nutrient deficiencies and pH imbalances.</li>
+                    <li><strong>Organic Amendments:</strong> Add organic matter like compost to improve soil health and plant resilience.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Onion Leaf Disease Detector. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+    const previewPlaceholder = document.getElementById('previewPlaceholder');
+    const analyzeImageBtn = document.getElementById('analyzeImageBtn');
+    const resultsSection = document.getElementById('resultsSection');
+    const video = document.getElementById('videoPreview');
+    const captureFromCameraBtn = document.getElementById('captureFromCameraBtn');
+    const uploadBtn = document.getElementById('uploadBtn');
+
+    const sampleImages = [
+        { src: 'img/Onion Leaf.jpg', label: 'Healthy' },
+        { src: 'img/Downy Mildew.jpg', label: 'Downy Mildew' },
+        { src: 'img/Purple Blotch.jpg', label: 'Purple Blotch' },
+        { src: 'img/Stemphylium Leaf Blight.jpg', label: 'Stemphylium Leaf Blight' }
+    ];
+
+    let stream = null;
+    let isCameraOn = false;
+
+    imageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                previewPlaceholder.style.display = 'none';
+                analyzeImageBtn.disabled = false;
+
+                const filename = file.name.toLowerCase();
+                if (filename.includes('downy')) {
+                    imagePreview.dataset.simulatedLabel = 'Downy Mildew';
+                } else if (filename.includes('purple')) {
+                    imagePreview.dataset.simulatedLabel = 'Purple Blotch';
+                } else if (filename.includes('stemphylium')) {
+                    imagePreview.dataset.simulatedLabel = 'Stemphylium Leaf Blight';
+                } else if (filename.includes('healthy') || filename.includes('onion')) {
+                    imagePreview.dataset.simulatedLabel = 'Healthy';
+                } else {
+                    imagePreview.dataset.simulatedLabel = 'Unknown';
+                }
+
+                resultsSection.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = '#';
+            imagePreview.style.display = 'none';
+            previewPlaceholder.style.display = 'block';
+            analyzeImageBtn.disabled = true;
+        }
+    });
+
+    analyzeImageBtn.addEventListener('click', function() {
+        const fakeLabel = imagePreview.dataset.simulatedLabel || 'Downy Mildew';
+
+        document.getElementById('diseaseType').textContent = fakeLabel === 'Healthy' ? 'No Disease Detected' : fakeLabel;
+        document.getElementById('confidenceScore').textContent = 'Simulated';
+
+        const description = document.getElementById('diseaseDescription');
+        const prescriptionList = document.getElementById('prescriptionList');
+        const mitigationList = document.getElementById('mitigationList');
+
+        if (fakeLabel === 'Downy Mildew') {
+            description.textContent = 'Downy mildew is caused by Peronospora destructor...';
+            prescriptionList.innerHTML = `<li>Use chlorothalonil</li>`;
+            mitigationList.innerHTML = `<li>Avoid overhead watering</li>`;
+        } else if (fakeLabel === 'Purple Blotch') {
+            description.textContent = 'Purple blotch appears as sunken purple lesions...';
+            prescriptionList.innerHTML = `<li>Apply tebuconazole</li>`;
+            mitigationList.innerHTML = `<li>Improve spacing</li>`;
+        } else if (fakeLabel === 'Stemphylium Leaf Blight') {
+            description.textContent = 'Tan lesions caused by Stemphylium vesicarium...';
+            prescriptionList.innerHTML = `<li>Use boscalid</li>`;
+            mitigationList.innerHTML = `<li>Reduce humidity</li>`;
+        } else if (fakeLabel === 'Healthy') {
+            description.textContent = 'This onion leaf appears healthy.';
+            prescriptionList.innerHTML = `<li>No action needed</li>`;
+            mitigationList.innerHTML = `<li>Maintain proper care</li>`;
+        }
+
+        resultsSection.style.display = 'block';
+
+        // SAVE to MySQL
+        fetch('save_result.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                image: imagePreview.src,
+                disease: fakeLabel,
+                confidence: 95.0,
+                description: description.textContent,
+                prescription: Array.from(prescriptionList.children).map(li => li.textContent).join('; '),
+                mitigation: Array.from(mitigationList.children).map(li => li.textContent).join('; ')
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log("Saved:", data);
+            loadHistory(); // refresh history
+        });
+    });
+
+    uploadBtn.addEventListener('click', function() {
+        imageInput.click();
+    });
+
+    captureFromCameraBtn.addEventListener('click', async () => {
+        if (!isCameraOn) {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                video.style.display = 'block';
+                isCameraOn = true;
+                previewPlaceholder.style.display = 'none';
+                imagePreview.style.display = 'none';
+                resultsSection.style.display = 'none';
+                captureFromCameraBtn.textContent = '📸 Capture';
+            } catch (err) {
+                alert('Camera access was denied.');
+            }
+        } else {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                video.style.display = 'none';
+                isCameraOn = false;
+                captureFromCameraBtn.textContent = '🎥 Start Camera';
+            }
+
+            const random = sampleImages[Math.floor(Math.random() * sampleImages.length)];
+            imagePreview.src = random.src;
+            imagePreview.style.display = 'block';
+            imagePreview.dataset.simulatedLabel = random.label;
+            analyzeImageBtn.disabled = false;
+        }
+    });
+
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    function loadHistory() {
+    fetch('get_history.php')
+        .then(res => res.json())
+        .then(data => {
+            const list = document.querySelector('.history-list');
+            const noMsg = document.getElementById('noHistoryMessage');
+            list.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                noMsg.style.display = 'block';
+                return;
+            }
+
+            noMsg.style.display = 'none';
+
+            data.forEach(record => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.innerHTML = `
+                    <div class="history-details">
+                        <strong>Date:</strong> ${record.timestamp} <br>
+                        <strong>Disease:</strong> ${record.disease} <br>
+                        <strong>Confidence:</strong> ${record.confidence}% <br>
+                    </div>
+                    <button class="btn view-details-btn">View Details</button>
+                    <div class="history-expanded-details" style="display: none; margin-top: 10px; border-top: 1px solid #ccc; padding-top: 10px;">
+                        <img src="${record.image}" alt="Leaf Image" style="max-width: 100%; border: 1px solid #888; margin-bottom: 10px;" />
+                        <p><strong>Description:</strong> ${record.description}</p>
+                        <p><strong>Prescription:</strong> ${record.prescription}</p>
+                        <p><strong>Mitigation:</strong> ${record.mitigation}</p>
+                    </div>
+                `;
+
+                const btn = div.querySelector('.view-details-btn');
+                const detailDiv = div.querySelector('.history-expanded-details');
+                btn.addEventListener('click', () => {
+                    detailDiv.style.display = detailDiv.style.display === 'none' ? 'block' : 'none';
+                });
+
+                list.appendChild(div);
+            });
+        });
+    }
+
+    loadHistory();
+    </script>
+</body>
+</html>
